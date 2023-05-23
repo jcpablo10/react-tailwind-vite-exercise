@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react'
 import Layout from '../../Components/Layout'
 import Card from '../../Components/Card'
 import GetProductsUseCase from '../../../app/products/application/getProductsUseCase'
+import ProductDetail from '../../Components/ProductDetail'
 
 const Home = () => {
 
@@ -26,6 +27,7 @@ const Home = () => {
 
   return (
     <Layout>
+      <ProductDetail />
       Home
       <div className='grid gap-4 grid-cols-1 w-full sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-auto max-w-screen-lg px-1'>
         {
