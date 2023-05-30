@@ -2,18 +2,25 @@ import { useContext } from "react"
 import {ShoppingCartContext} from '../../Context/index'
 import { PlusIcon } from "@heroicons/react/24/outline";
 
-const Card = ({category, images, price, title, description}) => {
+// const Card = ({category, images, price, title, description}) => {
+const Card = (product) => {
 
-  const {count, setCount, openProductDetail, setSelectedProduct} = useContext(ShoppingCartContext)
+  const {count, setCount, openProductDetail, setSelectedProduct, setCartProducts, cartProducts} = useContext(ShoppingCartContext)
+  const {category, images, price, title, description} = product
 
-  const selectProduct = (product) => {
+  const selectProduct = (item) => {
     openProductDetail()
-    setSelectedProduct(product)
+    setSelectedProduct(item)
+  }
+
+  const addProductsToCart = (newProduct) => {
+    setCount(count + 1)
+    setCartProducts([...cartProducts, newProduct])
   }
 
   return (
     <div
-      onClick={() => selectProduct({category, images, price, title, description})}
+      onClick={() => selectProduct(product)}
       className="bg-white cursor-pointer w-56 h-60"
     >
       <figure className="relative mb-2 w-full h-4/5">
@@ -28,7 +35,7 @@ const Card = ({category, images, price, title, description}) => {
           className="w-full h-full object-cover rounded-lg"
         />
         <div className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1"
-          onClick={() => setCount(count + 1)}
+          onClick={() => addProductsToCart(product) }
         >
           <PlusIcon className="w-6 h-6" />
         </div>
